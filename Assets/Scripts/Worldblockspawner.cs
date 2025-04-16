@@ -26,7 +26,7 @@ public class Worldblockspawner : MonoBehaviour
         GameObject block = Instantiate(blocks [randomIndex], spawnPoint.position, Quaternion.identity);
         block.transform.SetParent(transform);
 
-        Destroy(block,5f);
+        //Destroy(block,5f);
     }
 
 }
