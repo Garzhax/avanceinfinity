@@ -16,5 +16,6 @@ public class Moveblock : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+
     }
 }
