@@ -1,32 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Worldblockspawner : MonoBehaviour
 {
-    [SerializeField]
-    GameObject [] blocks;
-    public Transform spawnPoint;
+    [SerializeField] GameObject[] blocks;    // Bloques de piso
+    [SerializeField] GameObject[] items;    // Ítems recolectables (nuevo)
+    public Transform spawnPoint;             // Punto de spawn
 
-    // Start is called before the first frame update
+    [Header("Configuración de Ítems")]
+    [Range(0, 1)] public float itemSpawnChance = 0.3f; // 30% de probabilidad
+    public float itemYOffset = 1.5f;        // Altura de los ítems (sobre el bloque)
+
     void Start()
     {
         SpawnBlock();
-        InvokeRepeating("SpawnBlock",0,1f);
+        InvokeRepeating("SpawnBlock", 0, 1f); // Genera bloques cada 1 segundo
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnBlock()
     {
-        
-    }
-    public void SpawnBlock() 
-    {
-        int randomIndex = Random.Range(0, blocks.Length);
-        GameObject block = Instantiate(blocks [randomIndex], spawnPoint.position, Quaternion.identity);
+        // 1. Spawn del bloque
+        int randomBlockIndex = Random.Range(0, blocks.Length);
+        GameObject block = Instantiate(blocks[randomBlockIndex], spawnPoint.position, Quaternion.identity);
         block.transform.SetParent(transform);
 
-        //Destroy(block,5f);
-    }
+        // 2. Spawn de ítem (opcional)
+        if (items.Length > 0 && Random.value <= itemSpawnChance)
+        {
+            int randomItemIndex = Random.Range(0, items.Length);
+            Vector3 itemPosition = new Vector3(
+                spawnPoint.position.x + Random.Range(-2f, 2f), // Posición X aleatoria
+                spawnPoint.position.y + itemYOffset,           // Altura fija o aleatoria
+                spawnPoint.position.z
+            );
 
+            GameObject item = Instantiate(items[randomItemIndex], itemPosition, Quaternion.identity);
+            item.transform.SetParent(transform); // Opcional (para orden jerárquico)
+        }
+    }
 }

@@ -698,7 +698,11 @@ MonoBehaviour:
   - {fileID: 8501126827923327712, guid: 8c1ad572a5fca2d48ae4518b8f771e9e, type: 3}
   - {fileID: 7667212565137128335, guid: 51c527a5fbe530a4d9fb6f66718c7fcf, type: 3}
   - {fileID: 4260796070015167747, guid: 793d0b9fe94241340806a2fa5cced954, type: 3}
+  items:
+  - {fileID: 8628131242872920568, guid: 0596b57b2cbbcbe418dd7edabb9bf326, type: 3}
   spawnPoint: {fileID: 1564031415}
+  itemSpawnChance: 0.3
+  itemYOffset: 1.5
 --- !u!4 &912995228
 Transform:
   m_ObjectHideFlags: 0
